@@ -15,25 +15,7 @@ const AIR_MOVEMENT = .8
 #Movement
 var motion = Vector2()
 
-## States
 var currentAnimation = ""
-var currentState = 0
-var nextState = null
-
-enum ACTION {
-	IDLE,
-	IDLE_OFFENSE,
-	RUN,
-	JUMP,
-	FALL,
-	ATTACK	
-}
-
-enum STATE {
-	HOLD,
-	CONTROL
-}
-########
 
 var beingHurt = false
 
@@ -45,83 +27,59 @@ var health = 100
 
 #Create
 func _ready():
-	currentState = STATE.CONTROL
 	attackPos = $Sprite/AttackArea/AttackCollision.position
 	pass
 
 #Update Every Step
 func _process(delta):
-	if is_on_floor() && currentState == STATE.CONTROL:
+	if is_on_floor():
 		if Input.is_action_pressed("ui_accept"):
 			inputAttack()
 
-	processAction(motion)
 	animPlayer.play(currentAnimation)
 	
 	if !beingHurt:
 		flipCharacter(motion, attackPos)
 
-	print(currentState)
 	pass
 
 #Process Physics
-func _physics_process(delta):
-
-	#print (motion)
-
-	# Multiply fall speed for a better jump
-	if motion.y > 0:		
-		motion.y += GRAVITY * FALL_MULTIPLIER
-	# Multiply jump speed for a pressure sensitive jump
-	elif motion.y < 0 && !Input.is_action_pressed("ui_select"):		
-		motion.y += GRAVITY * JUMP_MULTIPLIER
-	# Regular gravity
-	else:
-		motion.y += GRAVITY	
-	
-	if currentState == STATE.CONTROL && !beingHurt:
-	
-		if is_on_floor():
-			motion.x = SPEED * inputHorizontal()
-			if Input.is_action_just_pressed("ui_select"):
-				motion.y = JUMP_HEIGHT	
-		else:
-			motion.x = (SPEED * AIR_MOVEMENT) * inputHorizontal()
-	elif currentState == STATE.HOLD:
-		motion.x = 0
-
-	motion = move_and_slide(motion, UP)
+func _physics_process(delta):	
 
 	pass
 
 ################ CUSTOM FUNCS #######################
 
+func _handle_move_input():
+	if is_on_floor():
+		motion.x = SPEED * inputHorizontal()
+		if Input.is_action_just_pressed("ui_select"):
+			motion.y = JUMP_HEIGHT	
+	else:
+		motion.x = (SPEED * AIR_MOVEMENT) * inputHorizontal()
+
+
+func _apply_movement():
+	motion = move_and_slide(motion, UP)	
+
+func _apply_gravity():
+		# Multiply fall speed for a better jump
+		if motion.y > 0:		
+			motion.y += GRAVITY * FALL_MULTIPLIER
+		# Multiply jump speed for a pressure sensitive jump
+		elif motion.y < 0 && !Input.is_action_pressed("ui_select"):		
+			motion.y += GRAVITY * JUMP_MULTIPLIER
+		# Regular gravity
+		else:
+			motion.y += GRAVITY	
+
 func receiveDamage(dmg):
 	health -= dmg
-	pass
-
-func processAction(motion):
-	if attackLvl > 0:
-		currentAnimation = "Attack"
-		currentState = STATE.HOLD
-	elif motion.x == 0 && motion.y == 0:
-		currentAnimation = "Idle"
-		currentState = STATE.CONTROL
-	elif motion.x != 0 && motion.y == 0:
-		currentAnimation = "Run"
-		currentState = STATE.CONTROL
-	elif motion.y < 0:
-		currentAnimation = "Jump"
-		currentState = STATE.CONTROL
-	elif motion.y > 0:
-		currentAnimation = "Fall"
-		currentState = STATE.CONTROL
 	pass
 
 func _on_playerAnimator_animation_finished(anim_name):
 	if anim_name == "Attack":
 		attackLvl = 0;
-		currentState = STATE.CONTROL
 		$Timer.start(1)
 	pass 
 
@@ -130,7 +88,6 @@ func inputHorizontal():
 	pass
 	
 func inputAttack():
-	currentState = STATE.HOLD
 	attackLvl += 1
 	#print (attackLvl)
 	pass	
@@ -160,7 +117,6 @@ func _on_AttackArea_body_entered(body):
 	if body.has_method("receiveDamage"):
 		body.receiveDamage(10)
 	pass 
-
 
 
 func _on_DamageArea_area_entered(area):

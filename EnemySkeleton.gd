@@ -24,6 +24,7 @@ func _process(delta):
 		else:
 			$Sprite/AnimationPlayer.play("SkeletonDead")
 			$CollisionBox.disabled = true;
+			$HitArea/HitBox.disabled = true;
 		
 		print("current", health)
 	else:
