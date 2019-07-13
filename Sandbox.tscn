@@ -492,11 +492,10 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Player"]
-editor/display_folded = true
 texture = ExtResource( 2 )
 vframes = 16
 hframes = 7
-frame = 7
+frame = 41
 
 [node name="playerAnimator" type="AnimationPlayer" parent="Player/Sprite"]
 anims/Attack = SubResource( 1 )
@@ -535,8 +534,6 @@ visible = false
 [node name="DamageBox" type="CollisionShape2D" parent="Player/DamageArea"]
 position = Vector2( 0, 10 )
 shape = SubResource( 11 )
-
-[node name="States" type="Node" parent="Player"]
 
 [node name="StatesHandler" type="Node" parent="Player"]
 script = ExtResource( 3 )
@@ -583,8 +580,7 @@ tile_data = PoolIntArray( -1, 0, 65537, -65536, 0, 65537, -65535, 0, 65537, -655
 
 [node name="Background" parent="." instance=ExtResource( 9 )]
 position = Vector2( 0, 26.0648 )
-[connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player" method="_on_playerAnimator_animation_finished"]
+[connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/StatesHandler" method="_on_anim_finished"]
 [connection signal="body_entered" from="Player/Sprite/AttackArea" to="Player" method="_on_AttackArea_body_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player" method="_on_DamageArea_area_entered"]
-[connection signal="animation_finished" from="EnemySkeleton/Sprite/AnimationPlayer" to="EnemySkeleton" method="_on_AnimationPlayer_animation_finished"]
