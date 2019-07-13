@@ -495,7 +495,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 16
 hframes = 7
-frame = 41
+frame = 64
 
 [node name="playerAnimator" type="AnimationPlayer" parent="Player/Sprite"]
 anims/Attack = SubResource( 1 )
@@ -583,4 +583,4 @@ position = Vector2( 0, 26.0648 )
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/StatesHandler" method="_on_anim_finished"]
 [connection signal="body_entered" from="Player/Sprite/AttackArea" to="Player" method="_on_AttackArea_body_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Player/DamageArea" to="Player" method="_on_DamageArea_area_entered"]
+[connection signal="area_entered" from="Player/DamageArea" to="Player/StatesHandler" method="_on_DamageArea"]

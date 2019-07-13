@@ -98,6 +98,8 @@ func _enter_state(new_state, old_state):
 			parent.currentAnimation = "Attack"
 		states.idleOffense:
 			parent.currentAnimation = "IdleOffense"
+		states.hurt:
+			parent.currentAnimation = "Hurt"
 	pass
 	
 func _exit_state(old_state, new_state):
@@ -105,3 +107,6 @@ func _exit_state(old_state, new_state):
 
 func _on_anim_finished(anim_name):
 	animFinished = true
+
+func _on_DamageArea(area):
+	pass # Replace with function body.

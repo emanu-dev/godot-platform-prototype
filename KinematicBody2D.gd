@@ -73,8 +73,13 @@ func _apply_gravity():
 		else:
 			motion.y += GRAVITY	
 
-func receiveDamage(dmg):
+func receiveDamage(area, dmg):
 	health -= dmg
+	$Sprite.flip_h = $Sprite.flip_h
+	var enemyPos = area.get_parent().position
+	motion.x += sign(self.position.x - enemyPos.x) * 300
+	motion.y += sign(self.position.y - enemyPos.y) * 150
+	motion = move_and_slide(motion, UP)	
 	pass
 
 func _on_playerAnimator_animation_finished(anim_name):
@@ -120,14 +125,4 @@ func _on_AttackArea_body_entered(body):
 
 
 func _on_DamageArea_area_entered(area):
-	if !beingHurt:
-		beingHurt = true
-		animPlayer.play("Hurt")
-		$Sprite.flip_h = $Sprite.flip_h
-		var enemyPos = area.get_parent().position
-		motion.x += sign(self.position.x - enemyPos.x) * 300
-		motion.y += sign(self.position.y - enemyPos.y) * 150
-		motion = move_and_slide(motion, UP)
-		yield(get_tree().create_timer(.3), "timeout")
-		beingHurt = false
 	pass # Replace with function body.
