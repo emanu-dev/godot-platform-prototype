@@ -37,9 +37,6 @@ func _process(delta):
 			inputAttack()
 
 	animPlayer.play(currentAnimation)
-	
-	if !beingHurt:
-		flipCharacter(motion, attackPos)
 
 	pass
 
@@ -73,31 +70,7 @@ func _apply_gravity():
 		else:
 			motion.y += GRAVITY	
 
-func receiveDamage(area, dmg):
-	health -= dmg
-	$Sprite.flip_h = $Sprite.flip_h
-	var enemyPos = area.get_parent().position
-	motion.x += sign(self.position.x - enemyPos.x) * 300
-	motion.y += sign(self.position.y - enemyPos.y) * 150
-	motion = move_and_slide(motion, UP)	
-	pass
-
-func _on_playerAnimator_animation_finished(anim_name):
-	if anim_name == "Attack":
-		attackLvl = 0;
-		$Timer.start(1)
-	pass 
-
-func inputHorizontal():
-	return int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	pass
-	
-func inputAttack():
-	attackLvl += 1
-	#print (attackLvl)
-	pass	
-
-func flipCharacter(motion, attackPos):
+func _flip_sprite(motion, attackPos):
 	#Flip sprite according to direction
 	if motion.x < 0:
 		$Sprite.flip_h = true 
@@ -107,16 +80,25 @@ func flipCharacter(motion, attackPos):
 	if sign(motion.x) != 0:
 		$Sprite/AttackArea/AttackCollision.position.x = attackPos.x * sign(motion.x)
 	
-	#print($Sprite/AttackArea/AttackCollision.position.x)
-	#print(sign(motion.x))	
+	pass
+
+func receiveDamage(area, dmg):
+	health -= dmg
+	$Sprite.flip_h = $Sprite.flip_h
+	var enemyPos = area.get_parent().position
+	motion.x += sign(self.position.x - enemyPos.x) * 300
+	motion.y += sign(self.position.y - enemyPos.y) * 150
+	motion = move_and_slide(motion, UP)	
+	pass
+
+func inputHorizontal():
+	return int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	pass
 	
-
-func _on_Timer_timeout():
-	#print("reset combo")
-	$Timer.stop()
-	pass
-
+func inputAttack():
+	attackLvl += 1
+	#print (attackLvl)
+	pass	
 
 func _on_AttackArea_body_entered(body):
 	if body.has_method("receiveDamage"):

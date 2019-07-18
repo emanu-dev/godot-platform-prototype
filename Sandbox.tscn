@@ -492,6 +492,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Player"]
+editor/display_folded = true
 texture = ExtResource( 2 )
 vframes = 16
 hframes = 7
@@ -518,7 +519,6 @@ shape = SubResource( 10 )
 disabled = true
 
 [node name="CollisionBox" type="CollisionShape2D" parent="Player"]
-visible = false
 position = Vector2( 0, 10 )
 shape = SubResource( 11 )
 
@@ -529,7 +529,6 @@ current = true
 
 [node name="DamageArea" type="Area2D" parent="Player"]
 editor/display_folded = true
-visible = false
 
 [node name="DamageBox" type="CollisionShape2D" parent="Player/DamageArea"]
 position = Vector2( 0, 10 )
@@ -582,5 +581,5 @@ tile_data = PoolIntArray( -1, 0, 65537, -65536, 0, 65537, -65535, 0, 65537, -655
 position = Vector2( 0, 26.0648 )
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/StatesHandler" method="_on_anim_finished"]
 [connection signal="body_entered" from="Player/Sprite/AttackArea" to="Player" method="_on_AttackArea_body_entered"]
-[connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Player/Timer" to="Player/StatesHandler" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player/StatesHandler" method="_on_DamageArea"]

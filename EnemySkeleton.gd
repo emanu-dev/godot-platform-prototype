@@ -7,9 +7,8 @@ var oldHealth = health
 func _ready():
 	pass # Replace with function body.
 
-func inflictDamage(player):
-	player.receiveDamage(25)
-	pass
+func _inflict_damage(value):
+	return value
 
 func receiveDamage(dmg):
 	health -= dmg
@@ -26,7 +25,7 @@ func _process(delta):
 			$CollisionBox.disabled = true;
 			$HitArea/HitBox.disabled = true;
 		
-		print("current", health)
+		#print("current", health)
 	else:
 		$Sprite/AnimationPlayer.play("SkeletonIdle")
 	

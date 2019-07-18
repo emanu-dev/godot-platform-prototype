@@ -15,27 +15,34 @@ func _ready():
 	call_deferred("set_state", states.idle)	
 
 func _state_logic(delta):
-	print (animFinished)
+	#print (animFinished)
 	parent._handle_move_input()
 	parent._apply_gravity()
+	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall].has(state):
 		parent._apply_movement()
 	
-	if state == states.duck:
-		parent.currentAnimation = "Duck"
+	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):	
+		parent._flip_sprite(parent.motion, parent.attackPos)
+	
+	if parent.beingHurt:
+		yield(get_tree().create_timer(1.0), "timeout")
+		parent.beingHurt = false
 	
 	#print (state)
 
-	
+#Transition conditions
 func _get_transition(delta):
 	match state:
 		states.idle, states.walk:
-			if !parent.is_on_floor():
+			if parent.beingHurt == true:
+				return states.hurt			
+			if !parent.is_on_floor(): #Player is on the floor
 				if parent.motion.y < 0:
 					return states.jump
 				if parent.motion.y >= 0:
 					return states.fall					
-			else:
+			else: #Player is airborne
 				if Input.is_action_pressed("ui_accept"):
 					return states.attack
 				elif Input.is_action_pressed("ui_down"):
@@ -44,7 +51,6 @@ func _get_transition(delta):
 					return states.walk
 				elif parent.motion.x == 0:
 					return states.idle
-					
 		states.idleOffense:
 			if !parent.is_on_floor():
 				if parent.motion.y < 0:
@@ -78,10 +84,12 @@ func _get_transition(delta):
 			if animFinished == true:
 				animFinished = false
 				return states.idleOffense
-				
+		states.hurt:
+			if parent.beingHurt == false:
+				return states.idle				
 	return null
 	
-	
+#Enter state conditions (mostly animations)
 func _enter_state(new_state, old_state):
 	match new_state:
 		states.idle:
@@ -108,5 +116,12 @@ func _exit_state(old_state, new_state):
 func _on_anim_finished(anim_name):
 	animFinished = true
 
-func _on_DamageArea(area):
+func _on_DamageArea(body):
+	body = body.get_parent()
+	if body.has_method("_inflict_damage"):
+		parent.beingHurt = true;
+		print(body.health)
+		print("on your left")
+
+func _on_Timer_timeout():
 	pass # Replace with function body.
