@@ -14,6 +14,7 @@ const AIR_MOVEMENT = .8
 
 #Movement
 var motion = Vector2()
+var enemyPos = Vector2()
 
 var currentAnimation = ""
 
