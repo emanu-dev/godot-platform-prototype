@@ -1,7 +1,6 @@
 extends StateMachine
 
 var animFinished = false
-onready var animPlayer = get_parent().get_node("Sprite/playerAnimator")
 
 func _ready():
 	add_state("idle")
@@ -25,8 +24,6 @@ func _state_logic(delta):
 		if state == states.hurt:
 			if parent.is_on_floor():
 				parent.motion.x = 0
-			else:
-				parent.motion.x = (parent.SPEED/2) * sign(parent.position.x - parent.enemyPos.x)
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):
 		parent._handle_move_input()
@@ -123,18 +120,12 @@ func _enter_state(new_state, old_state):
 			parent.currentAnimation = "IdleOffense"
 		states.hurt:
 			parent.currentAnimation = "Hurt"
-			get_parent().get_node("DamageArea/DamageBox").disabled = true
-			# Maybe get this out of here?:
-			if sign(parent.position.y - parent.enemyPos.y) > 0:
-				parent.motion.y = 386
-			else:
-				parent.motion.y = -386			
 	pass
 	
 func _exit_state(old_state, new_state):
 	match old_state:
 		states.hurt:
-			get_parent().get_node("DamageArea/DamageBox").disabled = false
+			parent._set_damage_box_disabled(false)
 
 func _on_anim_finished(anim_name):
 	animFinished = true
@@ -142,8 +133,7 @@ func _on_anim_finished(anim_name):
 func _on_DamageArea(body):
 	body = body.get_parent()
 	if body.has_method("_inflict_damage"):
-		parent.enemyPos = body.position
-		parent.beingHurt = true;
+		parent._set_damage(body._inflict_damage(), body.position)
 
 func _on_Timer_timeout():
 	pass # Replace with function body.

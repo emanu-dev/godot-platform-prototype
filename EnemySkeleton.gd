@@ -7,8 +7,8 @@ var oldHealth = health
 func _ready():
 	pass # Replace with function body.
 
-func _inflict_damage(value):
-	return value
+func _inflict_damage():
+	return 25
 
 func receiveDamage(dmg):
 	health -= dmg

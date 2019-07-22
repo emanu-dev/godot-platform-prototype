@@ -11,9 +11,12 @@ const JUMP_HEIGHT = -480
 const FALL_MULTIPLIER = 1.6
 const JUMP_MULTIPLIER = 2.2
 const AIR_MOVEMENT = .8
+const DMG_PUSHBACK = 386
 
 #Movement
 var motion = Vector2()
+
+var inflictedDamage = 0
 var enemyPos = Vector2()
 
 var currentAnimation = ""
@@ -81,25 +84,33 @@ func _flip_sprite(motion, attackPos):
 	if sign(motion.x) != 0:
 		$Sprite/AttackArea/AttackCollision.position.x = attackPos.x * sign(motion.x)
 	
-	pass
 
-func receiveDamage(area, dmg):
+func _set_damage(dmg, enemyPos):
 	health -= dmg
-	$Sprite.flip_h = $Sprite.flip_h
-	var enemyPos = area.get_parent().position
-	motion.x += sign(self.position.x - enemyPos.x) * 300
-	motion.y += sign(self.position.y - enemyPos.y) * 150
-	motion = move_and_slide(motion, UP)	
-	pass
+	beingHurt = true
+	
+	
+	#knockback
+	if sign(position.y - enemyPos.y) > 0:
+		motion.y = DMG_PUSHBACK
+	else:
+		motion.y = -DMG_PUSHBACK				
+	
+	motion.x = (SPEED/2) * sign(position.x - enemyPos.x)
+	_set_damage_box_disabled(true)
+	_apply_movement()
+
+func _set_damage_box_disabled(disabled):
+	get_node("DamageArea/DamageBox").disabled = disabled
 
 func inputHorizontal():
 	return int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	pass
+
 	
 func inputAttack():
 	attackLvl += 1
 	#print (attackLvl)
-	pass	
+
 
 func _on_AttackArea_body_entered(body):
 	if body.has_method("receiveDamage"):
