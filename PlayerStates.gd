@@ -20,7 +20,13 @@ func _state_logic(delta):
 	parent._apply_gravity()
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.hurt].has(state):
-		parent._apply_movement()
+		parent._apply_movement()		
+		
+		if state == states.hurt:
+			if parent.is_on_floor():
+				parent.motion.x = 0
+			else:
+				parent.motion.x = (parent.SPEED/2) * sign(parent.position.x - parent.enemyPos.x)
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):
 		parent._handle_move_input()
@@ -117,12 +123,12 @@ func _enter_state(new_state, old_state):
 			parent.currentAnimation = "IdleOffense"
 		states.hurt:
 			parent.currentAnimation = "Hurt"
-			parent.motion.x = (parent.SPEED/2) * sign(parent.position.x - parent.enemyPos.x)
+			get_parent().get_node("DamageArea/DamageBox").disabled = true
+			# Maybe get this out of here?:
 			if sign(parent.position.y - parent.enemyPos.y) > 0:
 				parent.motion.y = 386
 			else:
-				parent.motion.y = -386
-			get_parent().get_node("DamageArea/DamageBox").disabled = true
+				parent.motion.y = -386			
 	pass
 	
 func _exit_state(old_state, new_state):
