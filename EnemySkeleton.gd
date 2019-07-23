@@ -38,5 +38,3 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	
 	if anim_name == "SkeletonDead":	
 		get_parent().remove_child(self)
-
-	pass 

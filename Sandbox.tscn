@@ -485,6 +485,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 position = Vector2( 480, 288 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 26 )
 script = ExtResource( 1 )
 
@@ -535,7 +536,6 @@ scale = Vector2( 1.1, 1.05 )
 shape = SubResource( 11 )
 
 [node name="EnemySkeleton" type="KinematicBody2D" parent="."]
-editor/display_folded = true
 position = Vector2( 416, -32 )
 script = ExtResource( 4 )
 
@@ -580,3 +580,4 @@ position = Vector2( 0, 26.0648 )
 [connection signal="body_entered" from="Player/Sprite/AttackArea" to="Player" method="_on_AttackArea_body_entered"]
 [connection signal="timeout" from="Player/Timer" to="Player/StatesHandler" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player/StatesHandler" method="_on_DamageArea"]
+[connection signal="animation_finished" from="EnemySkeleton/Sprite/AnimationPlayer" to="EnemySkeleton" method="_on_AnimationPlayer_animation_finished"]
