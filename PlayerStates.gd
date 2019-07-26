@@ -1,6 +1,6 @@
 extends StateMachine
 
-var animFinished = false
+onready var playerSignals =  get_parent().get_node("Signals")
 
 func _ready():
 	add_state("idle")
@@ -15,19 +15,19 @@ func _ready():
 	call_deferred("set_state", states.idle)	
 
 func _state_logic(delta):
-	#print (animFinished)
-	parent._apply_gravity()
+	#print (playerSignals.animFinished)
+	parent.apply_gravity()
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.hurt].has(state):
-		parent._apply_movement()		
+		parent.apply_motion()		
 		
 		if state == states.hurt:
 			if parent.is_on_floor():
 				parent.motion.x = 0
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):
-		parent._handle_move_input()
-		parent._flip_sprite(parent.motion, parent.attackPos)
+		parent.handle_move()
+		parent.flip_sprite()
 	
 	#print (state)
 
@@ -35,7 +35,7 @@ func _state_logic(delta):
 func _get_transition(delta):
 	match state:
 		states.idle, states.walk:
-			if parent.beingHurt == true:
+			if parent.touchEnemy == true:
 				return states.hurt			
 			if !parent.is_on_floor(): #Player is on the floor
 				if parent.motion.y < 0:
@@ -52,7 +52,7 @@ func _get_transition(delta):
 				elif parent.motion.x == 0:
 					return states.idle
 		states.idleOffense:
-			if parent.beingHurt == true:
+			if parent.touchEnemy == true:
 				return states.hurt				
 			if !parent.is_on_floor():
 				if parent.motion.y < 0:
@@ -70,34 +70,34 @@ func _get_transition(delta):
 					return states.idleOffense
 											
 		states.jump:
-			if parent.beingHurt == true:
+			if parent.touchEnemy == true:
 				return states.hurt				
 			if parent.is_on_floor():
 				return states.idle			
 			if parent.motion.y >= 0:
 				return states.fall
 		states.fall:
-			if parent.beingHurt == true:
+			if parent.touchEnemy == true:
 				return states.hurt				
 			if parent.is_on_floor():
 				return states.idle
 			if parent.motion.y < 0:
 				return states.jump				
 		states.duck:
-			if parent.beingHurt == true:
+			if parent.touchEnemy == true:
 				return states.hurt				
 			if Input.is_action_just_released("ui_down"):
 				return states.idle
 		states.attack:
-			if parent.beingHurt == true:
+			if parent.touchEnemy == true:
 				return states.hurt				
-			if animFinished == true:
-				animFinished = false
+			if playerSignals.animFinished == true:
+				playerSignals.animFinished = false
 				return states.idleOffense
 		states.hurt:
-			if animFinished == true:
-				animFinished = false
-				parent.beingHurt = false;
+			if playerSignals.animFinished == true:
+				playerSignals.animFinished = false
+				parent.touchEnemy = false;
 				return states.idle				
 	return null
 	
@@ -126,14 +126,3 @@ func _exit_state(old_state, new_state):
 	match old_state:
 		states.hurt:
 			parent._set_damage_box_disabled(false)
-
-func _on_anim_finished(anim_name):
-	animFinished = true
-
-func _on_DamageArea(body):
-	body = body.get_parent()
-	if body.has_method("_inflict_damage"):
-		parent._set_damage(body._inflict_damage(), body.position)
-
-func _on_Timer_timeout():
-	pass # Replace with function body.
