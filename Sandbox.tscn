@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://TileSets/Tileset.png" type="Texture" id=1]
 [ext_resource path="res://ParalaxBackground.tscn" type="PackedScene" id=2]
@@ -480,6 +480,240 @@ tracks/2/keys = {
 [sub_resource type="RectangleShape2D" id=36]
 extents = Vector2( 21.776, 52 )
 
+[sub_resource type="Animation" id=37]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 15 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+}
+
+[sub_resource type="Animation" id=38]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=39]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+
+[sub_resource type="Animation" id=40]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 15 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+}
+
+[sub_resource type="Animation" id=41]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=42]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 11 ]
+}
+
 [node name="World" type="Node2D"]
 position = Vector2( 480, 288 )
 
@@ -500,6 +734,7 @@ tile_data = PoolIntArray( -1, 0, 65537, -65536, 0, 65537, -65535, 0, 65537, -655
 position = Vector2( 480, 314.065 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 26 )
 script = ExtResource( 3 )
 
@@ -554,7 +789,7 @@ shape = SubResource( 30 )
 
 [node name="EnemySkeleton" type="KinematicBody2D" parent="."]
 editor/display_folded = true
-position = Vector2( 370, -28 )
+position = Vector2( 330, -28 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
@@ -581,6 +816,66 @@ anims/SkeletonIdle = SubResource( 35 )
 [node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton/HitArea"]
 position = Vector2( 32, 16 )
 shape = SubResource( 36 )
+
+[node name="EnemySkeleton2" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 560, 32 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton2"]
+position = Vector2( 32, 16 )
+shape = SubResource( 32 )
+
+[node name="Sprite" type="Sprite" parent="EnemySkeleton2"]
+position = Vector2( 32, 0 )
+texture = ExtResource( 8 )
+flip_h = true
+hframes = 15
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton2/Sprite"]
+anims/SkeletonDead = SubResource( 37 )
+anims/SkeletonHit = SubResource( 38 )
+anims/SkeletonIdle = SubResource( 39 )
+
+[node name="HitArea" type="Area2D" parent="EnemySkeleton2"]
+
+[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton2/HitArea"]
+position = Vector2( 32, 16 )
+shape = SubResource( 36 )
+
+[node name="EnemySkeleton3" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 730, 32 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton3"]
+position = Vector2( 32, 16 )
+shape = SubResource( 32 )
+
+[node name="Sprite" type="Sprite" parent="EnemySkeleton3"]
+position = Vector2( 32, 0 )
+texture = ExtResource( 8 )
+flip_h = true
+hframes = 15
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton3/Sprite"]
+anims/SkeletonDead = SubResource( 40 )
+anims/SkeletonHit = SubResource( 41 )
+anims/SkeletonIdle = SubResource( 42 )
+
+[node name="HitArea" type="Area2D" parent="EnemySkeleton3"]
+
+[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton3/HitArea"]
+position = Vector2( 32, 16 )
+shape = SubResource( 36 )
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/States" method="_on_anim_finished"]
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/Signals" method="_on_playerAnimator_animation_finished"]
 [connection signal="animation_started" from="Player/Sprite/playerAnimator" to="Player/Signals" method="_on_playerAnimator_animation_started"]
@@ -590,3 +885,5 @@ shape = SubResource( 36 )
 [connection signal="area_entered" from="Player/DamageArea" to="Player/States" method="_on_DamageArea"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player/Signals" method="_on_DamageArea_area_entered"]
 [connection signal="animation_finished" from="EnemySkeleton/Sprite/AnimationPlayer" to="EnemySkeleton" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="EnemySkeleton2/Sprite/AnimationPlayer" to="EnemySkeleton2" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="EnemySkeleton3/Sprite/AnimationPlayer" to="EnemySkeleton3" method="_on_AnimationPlayer_animation_finished"]
