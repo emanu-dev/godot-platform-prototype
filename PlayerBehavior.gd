@@ -84,11 +84,13 @@ func _set_damage(dmg):
 		return null
 	
 func _dmg_knock_back(enemyPosition):
+	_zero_motion()
+	
 	motion.x = (SPEED/2) * sign(position.x - enemyPosition.x)		
 	
-	if sign(position.y - enemyPosition.y) > 0:
+	if sign(position.y - enemyPosition.y) >= 0:
 		motion.y = KNOCKBACK_FORCE
-	else:
+	elif sign(position.y - enemyPosition.y) < 0:
 		motion.y = -KNOCKBACK_FORCE
 
 func _set_damage_box_disabled(disabled):
@@ -96,3 +98,7 @@ func _set_damage_box_disabled(disabled):
 
 func _input_horizontal():
 	return int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+	
+func _zero_motion():
+	motion = Vector2(0 ,0)
+	apply_motion()
