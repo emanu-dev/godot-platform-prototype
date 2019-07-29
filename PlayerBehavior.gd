@@ -8,14 +8,15 @@ onready var attackArea = get_node("AttackArea/AttackCollision")
 const UP = Vector2(0, -1)
 const GRAVITY = 16
 const SPEED = 192
-const JUMP_HEIGHT = -480
+const JUMP_HEIGHT = -420
 const FALL_MULTIPLIER = 1.6
 const JUMP_MULTIPLIER = 2.2
 const AIR_MOVEMENT = .8
-const KNOCKBACK_FORCE = 386
+const KNOCKBACK_FORCE = 256
 
 #Movement
 var motion = Vector2()
+var gravityModifier = 1
 var attackAreaPos = null
 
 #Game Variables
@@ -29,26 +30,30 @@ func _ready():
 
 func _process(delta):
 	animPlayer.play(currentAnimation)
-	print(attackArea)
+	print(GRAVITY * gravityModifier)
 
 
 ################ PUBLIC FUNCTIONS #######################
 func apply_gravity():
+	motion.y += GRAVITY * gravityModifier	
+
+func handle_jump():
+	if is_on_floor():
+		gravityModifier = 1
+		
+		if Input.is_action_just_pressed("ui_select"):
+			motion.y = JUMP_HEIGHT		
+	else:
 		# Multiply fall speed for a better jump
 		if motion.y > 0:		
-			motion.y += GRAVITY * FALL_MULTIPLIER
+			gravityModifier = FALL_MULTIPLIER
 		# Multiply jump speed for a pressure sensitive jump
 		elif motion.y < 0 && !Input.is_action_pressed("ui_select"):		
-			motion.y += GRAVITY * JUMP_MULTIPLIER
-		# Regular gravity
-		else:
-			motion.y += GRAVITY	
-
+			gravityModifier = JUMP_MULTIPLIER
+			
 func handle_move():
 	if is_on_floor():
 		motion.x = SPEED * _input_horizontal()
-		if Input.is_action_just_pressed("ui_select"):
-			motion.y = JUMP_HEIGHT	
 	else:
 		motion.x = (SPEED * AIR_MOVEMENT) * _input_horizontal()
 
@@ -66,12 +71,17 @@ func flip_sprite():
 
 func damage_by_enemy(body):
 	if body.has_method("_inflict_damage"):
+		_reset_gravity_modifier()
 		_set_damage(body._inflict_damage())
 		_dmg_knock_back(body.position)
 		_set_damage_box_disabled(true)
 		apply_motion()
+		# print(motion)
 
 ################ PRIVATE FUNCTIONS #######################
+func _reset_gravity_modifier():
+	gravityModifier = 1
+
 func _set_damage(dmg):
 	if !touchEnemy:
 		if health - dmg >= 0:
@@ -86,7 +96,7 @@ func _set_damage(dmg):
 func _dmg_knock_back(enemyPosition):
 	_zero_motion()
 	
-	motion.x = (SPEED/2) * sign(position.x - enemyPosition.x)		
+	motion.x = (SPEED/2) * sign(position.x - enemyPosition.x)
 	
 	if sign(position.y - enemyPosition.y) >= 0:
 		motion.y = KNOCKBACK_FORCE

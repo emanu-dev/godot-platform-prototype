@@ -16,14 +16,18 @@ func _ready():
 
 func _state_logic(delta):
 	#print (playerSignals.animFinished)
-	parent.apply_gravity()
 	
-	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.hurt].has(state):
-		parent.apply_motion()		
+	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall].has(state):
+		parent.handle_jump()
+		parent.apply_gravity()
+		parent.apply_motion()	
 		
-		if state == states.hurt:
-			if parent.is_on_floor():
-				parent.motion.x = 0
+	if state == states.hurt:
+		parent.apply_gravity()
+		parent.apply_motion()	
+		
+		if parent.is_on_floor():
+			parent.motion.x = 0
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):
 		parent.handle_move()
@@ -72,16 +76,16 @@ func _get_transition(delta):
 		states.jump:
 			if parent.touchEnemy == true:
 				return states.hurt				
-			if parent.is_on_floor():
+			elif parent.is_on_floor():
 				return states.idle			
-			if parent.motion.y >= 0:
+			elif parent.motion.y >= 0:
 				return states.fall
 		states.fall:
 			if parent.touchEnemy == true:
-				return states.hurt				
-			if parent.is_on_floor():
+				return states.hurt
+			elif parent.is_on_floor():
 				return states.idle
-			if parent.motion.y < 0:
+			elif parent.motion.y < 0:
 				return states.jump				
 		states.duck:
 			if parent.touchEnemy == true:
