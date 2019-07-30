@@ -86,7 +86,7 @@ func _get_transition(delta):
 			elif parent.is_on_floor():
 				return states.idle
 			elif parent.motion.y < 0:
-				return states.jump				
+				return states.jump
 		states.duck:
 			if parent.touchEnemy == true:
 				return states.hurt				
