@@ -4,8 +4,8 @@ onready var parent = get_parent()
 var animFinished = false
 
 func _on_DamageArea_area_entered(body):
-	body = body.get_parent()
-	parent.damage_by_enemy(body)
+	var b = body.get_parent()
+	parent.damage_by_enemy(b)
 
 func _on_AttackArea_body_entered(body):
 	if body.has_method("receiveDamage"):

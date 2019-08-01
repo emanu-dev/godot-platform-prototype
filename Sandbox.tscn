@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://TileSets/magic-cliffs/tileset.png" type="Texture" id=1]
 [ext_resource path="res://ParalaxBackground.tscn" type="PackedScene" id=2]
@@ -7,9 +7,7 @@
 [ext_resource path="res://PlayerSignals.gd" type="Script" id=5]
 [ext_resource path="res://SpriteSheets/adventurer-v1.5-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://EnemySkeleton.gd" type="Script" id=7]
-[ext_resource path="res://SpriteSheets/Enemies/Skeleton Dead.png" type="Texture" id=8]
-[ext_resource path="res://SpriteSheets/Enemies/Skeleton Hit.png" type="Texture" id=9]
-[ext_resource path="res://SpriteSheets/Enemies/Skeleton Idle.png" type="Texture" id=10]
+[ext_resource path="res://SpriteSheets/Enemies/Skeleton.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -257,46 +255,35 @@ extents = Vector2( 24.1961, 59.7777 )
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 25, 50 )
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 19.5526, 49.8905 )
-
-[sub_resource type="Animation" id=19]
-length = 1.5
+[sub_resource type="Animation" id=23]
+resource_name = "SkeletonAttack"
+length = 1.8
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 8 ) ]
+"values": [ 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 15 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+
+[sub_resource type="Animation" id=19]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+"values": [ 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -308,34 +295,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 8 ]
+"values": [ 28, 29, 30, 31, 32, 33 ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -347,394 +310,23 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 10 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 11 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 21.776, 52 )
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 10, 40 )
 
-[sub_resource type="Animation" id=23]
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 15 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-
-[sub_resource type="Animation" id=24]
-length = 0.7
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 8 ]
-}
-
-[sub_resource type="Animation" id=25]
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 10 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 11 ]
-}
-
-[sub_resource type="Animation" id=26]
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 15 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-
-[sub_resource type="Animation" id=27]
-length = 0.7
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 8 ]
-}
-
-[sub_resource type="Animation" id=28]
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 10 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 11 ]
-}
-
-[sub_resource type="Animation" id=29]
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 8 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 15 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-}
-
-[sub_resource type="Animation" id=30]
-length = 0.7
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 8 ]
-}
-
-[sub_resource type="Animation" id=31]
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 10 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 11 ]
-}
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 20, 50 )
 
 [node name="World" type="Node2D"]
 position = Vector2( 480, 288 )
 
 [node name="Level" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="TileMap" type="TileMap" parent="Level"]
 z_index = -2
@@ -801,133 +393,40 @@ scale = Vector2( 1.1, 1.05 )
 shape = SubResource( 16 )
 
 [node name="EnemySkeleton" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 330, -28 )
+position = Vector2( 240, 36 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton"]
-position = Vector2( 32, 16 )
-shape = SubResource( 18 )
-
 [node name="Sprite" type="Sprite" parent="EnemySkeleton"]
-position = Vector2( 32, 0 )
+editor/display_folded = true
+position = Vector2( -40, -40 )
 texture = ExtResource( 8 )
 flip_h = true
-hframes = 15
-frame = 1
+vframes = 4
+hframes = 18
+frame = 54
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton/Sprite"]
+anims/SkeletonAttack = SubResource( 23 )
 anims/SkeletonDead = SubResource( 19 )
 anims/SkeletonHit = SubResource( 20 )
 anims/SkeletonIdle = SubResource( 21 )
 
-[node name="HitArea" type="Area2D" parent="EnemySkeleton"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySkeleton"]
+shape = SubResource( 24 )
 
-[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton/HitArea"]
-position = Vector2( 32, 16 )
-shape = SubResource( 22 )
+[node name="Area2D" type="Area2D" parent="EnemySkeleton"]
 
-[node name="EnemySkeleton2" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 700, 32 )
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton2"]
-position = Vector2( 32, 16 )
-shape = SubResource( 18 )
-
-[node name="Sprite" type="Sprite" parent="EnemySkeleton2"]
-position = Vector2( 32, 0 )
-texture = ExtResource( 8 )
-flip_h = true
-hframes = 15
-frame = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton2/Sprite"]
-anims/SkeletonDead = SubResource( 23 )
-anims/SkeletonHit = SubResource( 24 )
-anims/SkeletonIdle = SubResource( 25 )
-
-[node name="HitArea" type="Area2D" parent="EnemySkeleton2"]
-
-[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton2/HitArea"]
-position = Vector2( 32, 16 )
-shape = SubResource( 22 )
-
-[node name="EnemySkeleton3" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 1050, 32 )
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton3"]
-position = Vector2( 32, 16 )
-shape = SubResource( 18 )
-
-[node name="Sprite" type="Sprite" parent="EnemySkeleton3"]
-position = Vector2( 32, 0 )
-texture = ExtResource( 8 )
-flip_h = true
-hframes = 15
-frame = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton3/Sprite"]
-anims/SkeletonDead = SubResource( 26 )
-anims/SkeletonHit = SubResource( 27 )
-anims/SkeletonIdle = SubResource( 28 )
-
-[node name="HitArea" type="Area2D" parent="EnemySkeleton3"]
-
-[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton3/HitArea"]
-position = Vector2( 32, 16 )
-shape = SubResource( 22 )
-
-[node name="EnemySkeleton4" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 1560, 32 )
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton4"]
-position = Vector2( 32, 16 )
-shape = SubResource( 18 )
-
-[node name="Sprite" type="Sprite" parent="EnemySkeleton4"]
-position = Vector2( 32, 0 )
-texture = ExtResource( 8 )
-flip_h = true
-hframes = 15
-frame = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton4/Sprite"]
-anims/SkeletonDead = SubResource( 29 )
-anims/SkeletonHit = SubResource( 30 )
-anims/SkeletonIdle = SubResource( 31 )
-
-[node name="HitArea" type="Area2D" parent="EnemySkeleton4"]
-
-[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton4/HitArea"]
-position = Vector2( 32, 16 )
-shape = SubResource( 22 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySkeleton/Area2D"]
+shape = SubResource( 25 )
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/Signals" method="_on_playerAnimator_animation_finished"]
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/States" method="_on_anim_finished"]
 [connection signal="animation_started" from="Player/Sprite/playerAnimator" to="Player/Signals" method="_on_playerAnimator_animation_started"]
 [connection signal="timeout" from="Player/Timer" to="Player/States" method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Player/AttackArea" to="Player/Signals" method="_on_AttackArea_body_entered"]
 [connection signal="body_entered" from="Player/AttackArea" to="Player" method="_on_AttackArea_body_entered"]
+[connection signal="body_entered" from="Player/AttackArea" to="Player/Signals" method="_on_AttackArea_body_entered"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player/Signals" method="_on_DamageArea_area_entered"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player/States" method="_on_DamageArea"]
 [connection signal="animation_finished" from="EnemySkeleton/Sprite/AnimationPlayer" to="EnemySkeleton" method="_on_AnimationPlayer_animation_finished"]
-[connection signal="animation_finished" from="EnemySkeleton2/Sprite/AnimationPlayer" to="EnemySkeleton2" method="_on_AnimationPlayer_animation_finished"]
-[connection signal="animation_finished" from="EnemySkeleton3/Sprite/AnimationPlayer" to="EnemySkeleton3" method="_on_AnimationPlayer_animation_finished"]
-[connection signal="animation_finished" from="EnemySkeleton4/Sprite/AnimationPlayer" to="EnemySkeleton4" method="_on_AnimationPlayer_animation_finished"]

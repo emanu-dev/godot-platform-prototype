@@ -30,7 +30,6 @@ func _ready():
 
 func _process(delta):
 	animPlayer.play(currentAnimation)
-	print(GRAVITY * gravityModifier)
 
 
 ################ PUBLIC FUNCTIONS #######################
@@ -76,7 +75,6 @@ func damage_by_enemy(body):
 		_dmg_knock_back(body.position)
 		_set_damage_box_disabled(true)
 		apply_motion()
-		# print(motion)
 
 ################ PRIVATE FUNCTIONS #######################
 func _reset_gravity_modifier():
@@ -94,6 +92,7 @@ func _set_damage(dmg):
 		return null
 	
 func _dmg_knock_back(enemyPosition):
+	#move(Vector2(0,-1).rotated(get_global_pos().angle_to_point(enemyPosition))*speed*delta)
 	_zero_motion()
 	
 	motion.x = (SPEED/2) * sign(position.x - enemyPosition.x)
