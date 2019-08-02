@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://TileSets/magic-cliffs/tileset.png" type="Texture" id=1]
 [ext_resource path="res://ParalaxBackground.tscn" type="PackedScene" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://PlayerSignals.gd" type="Script" id=5]
 [ext_resource path="res://SpriteSheets/adventurer-v1.5-Sheet.png" type="Texture" id=6]
 [ext_resource path="res://EnemySkeleton.gd" type="Script" id=7]
-[ext_resource path="res://SpriteSheets/Enemies/Skeleton.png" type="Texture" id=8]
+[ext_resource path="res://EnemyStates.gd" type="Script" id=8]
+[ext_resource path="res://EnemySignals.gd" type="Script" id=9]
+[ext_resource path="res://SpriteSheets/Enemies/Skeleton.png" type="Texture" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -255,7 +257,7 @@ extents = Vector2( 24.1961, 59.7777 )
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 25, 50 )
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=18]
 resource_name = "SkeletonAttack"
 length = 1.8
 tracks/0/type = "value"
@@ -316,10 +318,10 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="RectangleShape2D" id=24]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 10, 40 )
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 20, 50 )
 
 [node name="World" type="Node2D"]
@@ -399,28 +401,34 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="States" type="Node" parent="EnemySkeleton"]
+script = ExtResource( 8 )
+
+[node name="Signals" type="Node" parent="EnemySkeleton"]
+script = ExtResource( 9 )
+
 [node name="Sprite" type="Sprite" parent="EnemySkeleton"]
-editor/display_folded = true
 position = Vector2( -40, -40 )
-texture = ExtResource( 8 )
+texture = ExtResource( 10 )
 flip_h = true
 vframes = 4
 hframes = 18
 frame = 54
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EnemySkeleton/Sprite"]
-anims/SkeletonAttack = SubResource( 23 )
+anims/SkeletonAttack = SubResource( 18 )
 anims/SkeletonDead = SubResource( 19 )
 anims/SkeletonHit = SubResource( 20 )
 anims/SkeletonIdle = SubResource( 21 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySkeleton"]
-shape = SubResource( 24 )
+[node name="CollisionBox" type="CollisionShape2D" parent="EnemySkeleton"]
+shape = SubResource( 22 )
 
-[node name="Area2D" type="Area2D" parent="EnemySkeleton"]
+[node name="HitArea" type="Area2D" parent="EnemySkeleton"]
+editor/display_folded = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySkeleton/Area2D"]
-shape = SubResource( 25 )
+[node name="HitBox" type="CollisionShape2D" parent="EnemySkeleton/HitArea"]
+shape = SubResource( 23 )
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/Signals" method="_on_playerAnimator_animation_finished"]
 [connection signal="animation_finished" from="Player/Sprite/playerAnimator" to="Player/States" method="_on_anim_finished"]
 [connection signal="animation_started" from="Player/Sprite/playerAnimator" to="Player/Signals" method="_on_playerAnimator_animation_started"]
@@ -430,3 +438,4 @@ shape = SubResource( 25 )
 [connection signal="area_entered" from="Player/DamageArea" to="Player/Signals" method="_on_DamageArea_area_entered"]
 [connection signal="area_entered" from="Player/DamageArea" to="Player/States" method="_on_DamageArea"]
 [connection signal="animation_finished" from="EnemySkeleton/Sprite/AnimationPlayer" to="EnemySkeleton" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="EnemySkeleton/Sprite/AnimationPlayer" to="EnemySkeleton/Signals" method="_on_AnimationPlayer_animation_finished"]

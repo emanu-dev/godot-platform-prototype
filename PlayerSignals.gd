@@ -8,8 +8,8 @@ func _on_DamageArea_area_entered(body):
 	parent.damage_by_enemy(b)
 
 func _on_AttackArea_body_entered(body):
-	if body.has_method("receiveDamage"):
-		body.receiveDamage(10)
+	if body.has_method("set_damage"):
+		body.set_damage(10)
 
 func _on_playerAnimator_animation_finished(anim_name):
 	animFinished = true

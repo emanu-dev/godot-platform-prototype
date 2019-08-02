@@ -1,40 +1,33 @@
 extends KinematicBody2D
 
+onready var animPlayer = get_node("Sprite/AnimationPlayer")
+
+var currentAnimation = null
 var health = 50
 var oldHealth = health
+var receivedDamage = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func has_received_damage():
+	return receivedDamage
+
+func set_received_damage(hasDamage):
+	receivedDamage = hasDamage
 
 func _inflict_damage():
 	return 25
 
-func receiveDamage(dmg):
+func set_damage(dmg):
 	health -= dmg
-	pass
+	receivedDamage = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	if oldHealth > health:
-		if health > 0:
-			$Sprite/AnimationPlayer.play("SkeletonHit")
-		else:
-			$Sprite/AnimationPlayer.play("SkeletonDead")
-			$CollisionBox.disabled = true;
-			$HitArea/HitBox.disabled = true;
-		
-		#print("current", health)
-	else:
-		$Sprite/AnimationPlayer.play("SkeletonIdle")
-	
 	pass
 
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "SkeletonHit":
-		oldHealth = health
+func die():
+	$CollisionBox.disabled = true;
+	$HitArea/HitBox.disabled = true;
+	get_parent().remove_child(self)
 	
-	if anim_name == "SkeletonDead":	
-		get_parent().remove_child(self)
+func play_anim(anim):
+	animPlayer.play(anim)
