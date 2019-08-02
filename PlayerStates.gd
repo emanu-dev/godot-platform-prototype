@@ -109,21 +109,21 @@ func _get_transition(delta):
 func _enter_state(new_state, old_state):
 	match new_state:
 		states.idle:
-			parent.currentAnimation = "Idle"
+			parent.play_anim("Idle")
 		states.walk:
-			parent.currentAnimation = "Run"
+			parent.play_anim("Run")
 		states.jump:
-			parent.currentAnimation = "Jump"
+			parent.play_anim("Jump")
 		states.fall:
-			parent.currentAnimation = "Fall"
+			parent.play_anim("Fall")
 		states.duck:
-			parent.currentAnimation = "Duck"
+			parent.play_anim("Duck")
 		states.attack:
-			parent.currentAnimation = "Attack"
+			parent.play_anim("Attack")
 		states.idleOffense:
-			parent.currentAnimation = "IdleOffense"
+			parent.play_anim("IdleOffense")
 		states.hurt:
-			parent.currentAnimation = "Hurt"
+			parent.play_anim("Hurt")
 	pass
 	
 func _exit_state(old_state, new_state):

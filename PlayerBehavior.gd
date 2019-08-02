@@ -76,6 +76,9 @@ func damage_by_enemy(body):
 		_set_damage_box_disabled(true)
 		apply_motion()
 
+func play_anim(anim):
+	animPlayer.play(anim)
+
 ################ PRIVATE FUNCTIONS #######################
 func _reset_gravity_modifier():
 	gravityModifier = 1
