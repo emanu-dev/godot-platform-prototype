@@ -8,6 +8,7 @@ var health = 50
 var speed = 96
 var oldHealth = health
 var receivedDamage = false
+var finishedAttack = false
 
 func _process(delta):
 	pass
@@ -20,6 +21,15 @@ func die():
 func play_anim(anim):
 	animPlayer.play(anim)
 	
+func attack():
+	finishedAttack = false
+	
+func finish_attack():
+	finishedAttack = true
+	
+func has_finished_attack():
+	return finishedAttack
+
 func has_received_damage():
 	return receivedDamage
 

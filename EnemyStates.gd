@@ -2,6 +2,7 @@ extends StateMachine
 
 onready var enemySignals =  get_parent().get_node("Signals")
 var motion = Vector2()
+var distance = 255
 
 func _ready():
 	add_state("idle")
@@ -14,14 +15,13 @@ func _ready():
 
 func _state_logic(delta):
 	print(state)
-	
+	motion.x = 0
 	#Move this to parent
 	if [states.idle, states.walk].has(state):
-		motion.x = 0
 		if parent.rayCast.is_colliding():
-			var direction = sign(parent.rayCast.get_collider().position.x - parent.position.x)
-			print ("player in sight at ", direction)
-			motion.x = parent.speed * direction
+			distance = parent.rayCast.get_collider().position.x - parent.position.x
+			print ("player in sight at ", distance)
+			motion.x = parent.speed * sign(distance)
 			motion = parent.move_and_slide(motion, Vector2(0, -1))	
 
 #Transition conditions
@@ -38,11 +38,24 @@ func _get_transition(delta):
 		states.react:
 			pass
 		states.walk:
+			if abs(distance) < 64:
+				return states.attack
 			if motion.x == 0:
 				return states.idle
+			elif parent.has_received_damage():
+				if parent.health > 0:
+					return states.hit
+				else:
+					return states.die				
 			pass
 		states.attack:
-			pass
+			if parent.has_finished_attack():
+				return states.idle
+			elif parent.has_received_damage():
+				if parent.health > 0:
+					return states.hit
+				else:
+					return states.die
 		states.hit:
 			if !parent.has_received_damage():
 				return states.idle
@@ -55,6 +68,7 @@ func _enter_state(new_state, old_state):
 		states.idle:
 			parent.play_anim("SkeletonIdle")
 		states.attack:
+			parent.attack()
 			parent.play_anim("SkeletonAttack")
 		states.walk:
 			parent.play_anim("SkeletonWalk")
