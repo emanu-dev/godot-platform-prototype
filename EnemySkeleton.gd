@@ -1,8 +1,11 @@
 extends KinematicBody2D
 
 onready var animPlayer = get_node("Sprite/AnimationPlayer")
+onready var enemySignals =  get_node("Signals")
+onready var rayCast =  get_node("RayCast2D")
 
 var health = 50
+var speed = 96
 var oldHealth = health
 var receivedDamage = false
 

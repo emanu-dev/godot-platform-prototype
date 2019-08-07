@@ -1,6 +1,7 @@
 extends StateMachine
 
 onready var enemySignals =  get_parent().get_node("Signals")
+var motion = Vector2()
 
 func _ready():
 	add_state("idle")
@@ -13,13 +14,23 @@ func _ready():
 
 func _state_logic(delta):
 	print(state)
-	pass
+	
+	#Move this to parent
+	if [states.idle, states.walk].has(state):
+		motion.x = 0
+		if parent.rayCast.is_colliding():
+			var direction = sign(parent.rayCast.get_collider().position.x - parent.position.x)
+			print ("player in sight at ", direction)
+			motion.x = parent.speed * direction
+			motion = parent.move_and_slide(motion, Vector2(0, -1))	
 
 #Transition conditions
 func _get_transition(delta):
 	match state:
 		states.idle:
-			if parent.has_received_damage():
+			if abs(motion.x) > 0:
+				return states.walk 
+			elif parent.has_received_damage():
 				if parent.health > 0:
 					return states.hit
 				else:
@@ -27,6 +38,8 @@ func _get_transition(delta):
 		states.react:
 			pass
 		states.walk:
+			if motion.x == 0:
+				return states.idle
 			pass
 		states.attack:
 			pass
@@ -43,6 +56,8 @@ func _enter_state(new_state, old_state):
 			parent.play_anim("SkeletonIdle")
 		states.attack:
 			parent.play_anim("SkeletonAttack")
+		states.walk:
+			parent.play_anim("SkeletonWalk")
 		states.hit:
 			parent.play_anim("SkeletonHit")
 		states.die:
