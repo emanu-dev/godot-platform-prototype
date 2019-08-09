@@ -16,6 +16,7 @@ func _process(delta):
 func die():
 	$CollisionBox.disabled = true;
 	$HitArea/HitBox.disabled = true;
+	yield(animPlayer, "animation_finished")
 	get_parent().remove_child(self)
 	
 func play_anim(anim):

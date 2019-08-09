@@ -76,6 +76,7 @@ func _enter_state(new_state, old_state):
 			parent.play_anim("SkeletonHit")
 		states.die:
 			parent.play_anim("SkeletonDead")
+			parent.die()
 	
 func _exit_state(old_state, new_state):
 	match state:
