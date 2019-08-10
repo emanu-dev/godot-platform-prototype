@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Character
 
 #OnreadyConst
 onready var animPlayer = get_node("Sprite/playerAnimator")
@@ -23,14 +23,11 @@ var attackAreaPos = null
 var health = 100
 var touchEnemy = false
 
-var currentAnimation = ""
-
 func _ready():
 	attackAreaPos = attackArea.position	
 
 func _process(delta):
-	animPlayer.play(currentAnimation)
-
+	pass
 
 ################ PUBLIC FUNCTIONS #######################
 func apply_gravity():
