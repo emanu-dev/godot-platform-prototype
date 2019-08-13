@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Skeleton.png-b307f27f632770828808dd5b383ec259.stex"
+path="res://.import/SkeletonFIX.png-27acb55653b4c69d8c86ee7ddf515114.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SpriteSheets/Enemies/Skeleton.png"
-dest_files=[ "res://.import/Skeleton.png-b307f27f632770828808dd5b383ec259.stex" ]
+source_file="res://SpriteSheets/Enemies/SkeletonFIX.png"
+dest_files=[ "res://.import/SkeletonFIX.png-27acb55653b4c69d8c86ee7ddf515114.stex" ]
 
 [params]
 
