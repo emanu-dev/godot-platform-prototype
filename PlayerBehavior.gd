@@ -1,4 +1,5 @@
 extends Character
+signal player_dead
 
 #OnreadyConst
 onready var attackArea = get_node("AttackArea/AttackCollision")
@@ -22,23 +23,25 @@ func _ready():
 	attackAreaPos = attackArea.position	
 
 func _process(delta):
+	print(health)
+	if health <= 0:
+		emit_signal("player_dead")	
 	pass
 
 ################ PUBLIC FUNCTIONS #######################
-
 
 func handle_jump():
 	if is_on_floor():
 		set_gravity_modifier(1)
 		
-		if Input.is_action_just_pressed("ui_select"):
+		if Input.is_action_just_pressed("jump"):
 			motion.y = JUMP_HEIGHT		
 	else:
 		# Multiply fall speed for a better jump
 		if motion.y > 0:		
 			set_gravity_modifier(FALL_MULTIPLIER)
 		# Multiply jump speed for a pressure sensitive jump
-		elif motion.y < 0 && !Input.is_action_pressed("ui_select"):		
+		elif motion.y < 0 && !Input.is_action_pressed("jump"):		
 			set_gravity_modifier(JUMP_MULTIPLIER)
 			
 func handle_move():
@@ -48,13 +51,9 @@ func handle_move():
 		motion.x = (SPEED * AIR_MOVEMENT) * _input_horizontal()
 
 func flip_sprite():
-	#Flip sprite according to direction
-	if motion.x < 0:
-		$Sprite.flip_h = true 
-		attackArea.position.x = attackAreaPos.x *-1
-	elif motion.x > 0:
-		$Sprite.flip_h = false
-		attackArea.position.x = attackAreaPos.x
+	if _input_horizontal() != 0:
+		set_direction(_input_horizontal())
+	pass
 
 func damage_by_enemy(body):
 	if body.has_method("_inflict_damage"):
@@ -63,6 +62,15 @@ func damage_by_enemy(body):
 		_dmg_knock_back(body.position)
 		_set_damage_box_disabled(true)
 		apply_motion()
+
+func began_attack():
+	return Input.is_action_pressed("attack")
+	
+func duck():
+	return Input.is_action_pressed("ui_down")
+
+func stand_up():
+	return Input.is_action_just_released("ui_down")	
 
 ################ PRIVATE FUNCTIONS #######################
 func _set_damage(dmg):

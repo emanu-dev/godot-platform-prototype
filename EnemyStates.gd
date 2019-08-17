@@ -14,13 +14,13 @@ func _ready():
 	call_deferred("set_state", states.idle)	
 
 func _state_logic(delta):
-	print(state)
+	# print(state)
 	motion.x = 0
 	#Move this to parent
 	if [states.idle, states.walk].has(state):
 		if parent.rayCast.is_colliding():
 			distance = parent.rayCast.get_collider().position.x - parent.position.x
-			print ("player in sight at ", distance)
+			# print ("player in sight at ", distance)
 			motion.x = parent.speed * sign(distance)
 			motion = parent.move_and_slide(motion, Vector2(0, -1))	
 

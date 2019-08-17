@@ -5,11 +5,20 @@ var animator = null setget set_animator
 
 const UP = Vector2(0, -1)
 const GRAVITY = 16
+const DIRECTION_RIGHT = 1
+const DIRECTION_LEFT = -1
 
 var motion = Vector2()
+var direction = Vector2(DIRECTION_RIGHT, 1)
 var gravityModifier = 1 setget set_gravity_modifier, get_gravity_modifier
 var health = 100
 
+func set_direction(hor_direction):
+    if hor_direction == 0:
+        hor_direction = DIRECTION_RIGHT # default to right if param is 0
+    var hor_dir_mod = hor_direction / abs(hor_direction) # get unit direction
+    apply_scale(Vector2(hor_dir_mod * direction.x, 1)) # flip
+    direction = Vector2(hor_dir_mod, direction.y) # update direction
 
 func set_animator(node):
 	animator = node

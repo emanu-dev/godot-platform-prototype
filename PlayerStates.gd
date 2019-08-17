@@ -41,15 +41,15 @@ func _get_transition(delta):
 		states.idle, states.walk:
 			if parent.touchEnemy == true:
 				return states.hurt			
-			if !parent.is_on_floor(): #Player is on the floor
+			if !parent.is_on_floor(): #Player is airborne
 				if parent.motion.y < 0:
 					return states.jump
 				if parent.motion.y >= 0:
 					return states.fall					
-			else: #Player is airborne
-				if Input.is_action_pressed("ui_accept"):
+			else: #Player is on the floor
+				if parent.began_attack():
 					return states.attack
-				elif Input.is_action_pressed("ui_down"):
+				elif parent.duck():
 					return states.duck					
 				elif parent.motion.x != 0:
 					return states.walk
@@ -64,9 +64,9 @@ func _get_transition(delta):
 				if parent.motion.y >= 0:
 					return states.fall					
 			else:
-				if Input.is_action_pressed("ui_accept"):
+				if parent.began_attack():
 					return states.attack
-				elif Input.is_action_pressed("ui_down"):
+				elif parent.duck():
 					return states.duck					
 				elif parent.motion.x != 0:
 					return states.walk
@@ -90,7 +90,7 @@ func _get_transition(delta):
 		states.duck:
 			if parent.touchEnemy == true:
 				return states.hurt				
-			if Input.is_action_just_released("ui_down"):
+			if parent.stand_up():
 				return states.idle
 		states.attack:
 			if parent.touchEnemy == true:
