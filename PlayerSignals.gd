@@ -15,5 +15,4 @@ func _on_playerAnimator_animation_finished(anim_name):
 	animFinished = true
 
 func _on_playerAnimator_animation_started(anim_name):
-	#animFinished = false
-	pass
+	animFinished = false
