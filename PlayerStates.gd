@@ -23,17 +23,16 @@ func _state_logic(delta):
 		parent.apply_motion()	
 		
 	if state == states.hurt:
+		print(parent.motion)
 		parent.apply_gravity()
-		parent.apply_motion()	
-		
-		if parent.is_on_floor():
-			parent.motion.x = 0
+		print(parent.motion)
+		parent.apply_motion()
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):
 		parent.handle_move()
 		parent.flip_sprite()
 	
-	#print (state)
+	# print (state)
 
 #Transition conditions
 func _get_transition(delta):
@@ -123,6 +122,7 @@ func _enter_state(new_state, old_state):
 		states.idleOffense:
 			parent.play_anim("IdleOffense")
 		states.hurt:
+			parent._zero_motion()
 			parent.play_anim("Hurt")
 	pass
 	
