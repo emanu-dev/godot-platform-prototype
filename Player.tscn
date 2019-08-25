@@ -220,4 +220,3 @@ shape = SubResource( 10 )
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
 [connection signal="body_entered" from="AttackArea" to="Signals" method="_on_AttackArea_body_entered"]
 [connection signal="area_entered" from="DamageArea" to="Signals" method="_on_DamageArea_area_entered"]
-[connection signal="area_entered" from="DamageArea" to="States" method="_on_DamageArea"]
