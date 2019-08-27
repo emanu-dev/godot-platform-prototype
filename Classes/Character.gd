@@ -13,6 +13,8 @@ var direction = Vector2(DIRECTION_RIGHT, 1)
 var gravityModifier = 1 setget set_gravity_modifier, get_gravity_modifier
 var health = 100
 
+var enemyTouchedPosition = Vector2() setget set_enemy_touched_position, get_enemy_touched_position
+
 func set_direction(hor_direction):
     if hor_direction == 0:
         hor_direction = DIRECTION_RIGHT # default to right if param is 0
@@ -29,14 +31,24 @@ func set_gravity_modifier(newvalue):
 func get_gravity_modifier():
 	return gravityModifier
 
-func apply_motion():
-	motion = move_and_slide(motion, UP)
-
 func apply_gravity():
 	motion.y += GRAVITY * gravityModifier
 
+func apply_motion():
+	motion = move_and_slide(motion, UP)
+
+func set_motion(m):
+	motion = m
+	apply_motion()
+
 func play_anim(animName):
 	animator.play(animName)
+
+func set_enemy_touched_position(p):
+	enemyTouchedPosition = p
+
+func get_enemy_touched_position():
+	return enemyTouchedPosition
 	
 func attack():
 	pass

@@ -15,18 +15,15 @@ func _ready():
 	call_deferred("set_state", states.idle)	
 
 func _state_logic(delta):
-	#print (playerSignals.animFinished)
-	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall].has(state):
 		parent.handle_jump()
 		parent.apply_gravity()
 		parent.apply_motion()	
 		
 	if state == states.hurt:
-		print(parent.motion)
 		parent.apply_gravity()
-		print(parent.motion)
 		parent.apply_motion()
+		parent.touchEnemy = true
 	
 	if [states.idle, states.idleOffense, states.jump, states.walk, states.fall, states.duck].has(state):
 		parent.handle_move()
@@ -122,8 +119,9 @@ func _enter_state(new_state, old_state):
 		states.idleOffense:
 			parent.play_anim("IdleOffense")
 		states.hurt:
-			parent._zero_motion()
 			parent.play_anim("Hurt")
+			parent.dmg_knock_back()
+			parent._set_damage_box_disabled(true)
 	pass
 	
 func _exit_state(old_state, new_state):

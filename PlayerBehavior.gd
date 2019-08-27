@@ -23,17 +23,17 @@ func _ready():
 	attackAreaPos = attackArea.position	
 
 func _process(delta):
-	#print(health)
+	print(health)
+	#print(get_node("DamageArea/DamageBox").disabled)
+	#print(touchEnemy)
 	
-	if Input.is_action_just_pressed("ui_up"):
-		touchEnemy = true
-		_dmg_knock_back(0)
+	if touchEnemy:
+		print("dont stop me now!!")
 	
 	if health <= 0:
 		emit_signal("player_dead")	
 
 ################ PUBLIC FUNCTIONS #######################
-
 func handle_jump():
 	if is_on_floor():
 		set_gravity_modifier(1)
@@ -59,12 +59,14 @@ func flip_sprite():
 		set_direction(_input_horizontal())
 	pass
 
+func dmg_knock_back():
+	var tempPos = self.global_position - get_enemy_touched_position()
+	tempPos = Vector2(sign(tempPos.x), sign(tempPos.y)) * -1
+	motion = tempPos * JUMP_HEIGHT/2.5
+
 func damage_by_enemy(body):
-	if body.has_method("_inflict_damage"):
-		set_gravity_modifier(1)
-		_set_damage(body._inflict_damage())
-		_dmg_knock_back(body.position)
-		_set_damage_box_disabled(true)
+	set_gravity_modifier(1)
+	_set_damage(body.inflict_damage())
 
 func began_attack():
 	return Input.is_action_pressed("attack")
@@ -75,24 +77,17 @@ func duck():
 func stand_up():
 	return Input.is_action_just_released("ui_down")	
 
-
 ################ PRIVATE FUNCTIONS #######################
 func _set_damage(dmg):
-	if !touchEnemy:
-		if health - dmg >= 0:
-			health -= dmg
-		else:
-			health -= 0
-		touchEnemy = true
-	
-func _dmg_knock_back(enemyPosition):
-	motion = Vector2(-140, -100)
+	if health - dmg >= 0:
+		health -= dmg
+	else:
+		health -= 0
 
 func _set_damage_box_disabled(disabled):
 	get_node("DamageArea/DamageBox").disabled = disabled
 
 func _input_horizontal():
-	#print("listens to input")
 	return int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	
 func _zero_motion():

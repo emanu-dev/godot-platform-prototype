@@ -41,5 +41,5 @@ func set_damage(dmg):
 	health -= dmg
 	receivedDamage = true
 
-func _inflict_damage():
+func inflict_damage():
 	return 25
