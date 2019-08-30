@@ -3,6 +3,8 @@ signal player_dead
 
 #OnreadyConst
 onready var attackArea = get_node("AttackArea/AttackCollision")
+onready var timer = get_node("Timer")
+onready var sprite = get_node("Sprite")
 
 #Const
 const SPEED = 192
@@ -17,7 +19,8 @@ var attackAreaPos = null
 
 #Game Variables
 var touchEnemy = false
-var timeInvincible = 3
+var timeInvincible = 2
+var invincibleCount = 0
 
 func _ready():
 	set_animator(get_node("Sprite/playerAnimator"))
@@ -68,7 +71,23 @@ func damage_by_enemy(body):
 
 func began_attack():
 	return Input.is_action_pressed("attack")
-	
+
+func toggle_invincibility():
+	if timer.is_stopped():
+		timer.start(0.05)
+		_set_damage_box_disabled(true)
+	else:
+		if invincibleCount < timeInvincible:
+			if sprite.visible:
+				sprite.visible = false
+			else: 
+				sprite.visible = true
+			invincibleCount += timer.wait_time
+		else:
+			_set_damage_box_disabled(false)
+			invincibleCount = 0
+			timer.stop()		
+		
 func duck():
 	return Input.is_action_pressed("ui_down")
 

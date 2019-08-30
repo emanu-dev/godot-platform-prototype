@@ -120,12 +120,10 @@ func _enter_state(new_state, old_state):
 		states.hurt:
 			parent.play_anim("Hurt")
 			parent.dmg_knock_back()
-			parent._set_damage_box_disabled(true)
-			parent.get_node("Timer").start(0.05)
+			parent.toggle_invincibility()
 	pass
 	
 func _exit_state(old_state, new_state):
 	match old_state:
 		states.hurt:
 			pass
-			# parent._set_damage_box_disabled(false)
