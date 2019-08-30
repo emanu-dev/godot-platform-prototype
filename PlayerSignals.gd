@@ -2,6 +2,7 @@ extends Node
 
 onready var parent = get_parent()
 var animFinished = false
+var invincibleCount = 0
 
 func _on_DamageArea_area_entered(body):
 	var b = body.get_parent()
@@ -19,3 +20,15 @@ func _on_playerAnimator_animation_finished(anim_name):
 
 func _on_playerAnimator_animation_started(anim_name):
 	animFinished = false
+
+func _on_Timer_timeout():
+	if invincibleCount < parent.timeInvincible:
+		if parent.get_node("Sprite").visible:
+			parent.get_node("Sprite").visible = false
+		else: 
+			parent.get_node("Sprite").visible = true
+		invincibleCount += parent.get_node("Timer").wait_time
+	else:
+		parent._set_damage_box_disabled(false)
+		invincibleCount = 0
+		parent.get_node("Timer").stop()

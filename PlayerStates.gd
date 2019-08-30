@@ -58,17 +58,16 @@ func _get_transition(delta):
 				if parent.motion.y < 0:
 					return states.jump
 				if parent.motion.y >= 0:
-					return states.fall					
+					return states.fall
 			else:
 				if parent.began_attack():
 					return states.attack
 				elif parent.duck():
-					return states.duck					
+					return states.duck
 				elif parent.motion.x != 0:
 					return states.walk
 				elif parent.motion.x == 0:
 					return states.idleOffense
-											
 		states.jump:
 			if parent.touchEnemy == true:
 				return states.hurt				
@@ -122,9 +121,11 @@ func _enter_state(new_state, old_state):
 			parent.play_anim("Hurt")
 			parent.dmg_knock_back()
 			parent._set_damage_box_disabled(true)
+			parent.get_node("Timer").start(0.05)
 	pass
 	
 func _exit_state(old_state, new_state):
 	match old_state:
 		states.hurt:
-			parent._set_damage_box_disabled(false)
+			pass
+			# parent._set_damage_box_disabled(false)

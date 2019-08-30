@@ -215,7 +215,7 @@ scale = Vector2( 1.1, 1.05 )
 shape = SubResource( 10 )
 [connection signal="animation_finished" from="Sprite/playerAnimator" to="Signals" method="_on_playerAnimator_animation_finished"]
 [connection signal="animation_started" from="Sprite/playerAnimator" to="Signals" method="_on_playerAnimator_animation_started"]
-[connection signal="timeout" from="Timer" to="States" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="Signals" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
 [connection signal="body_entered" from="AttackArea" to="Signals" method="_on_AttackArea_body_entered"]
 [connection signal="area_entered" from="DamageArea" to="Signals" method="_on_DamageArea_area_entered"]

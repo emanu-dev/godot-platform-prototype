@@ -17,18 +17,16 @@ var attackAreaPos = null
 
 #Game Variables
 var touchEnemy = false
+var timeInvincible = 3
 
 func _ready():
 	set_animator(get_node("Sprite/playerAnimator"))
 	attackAreaPos = attackArea.position	
 
 func _process(delta):
-	print(health)
+	#print(health)
 	#print(get_node("DamageArea/DamageBox").disabled)
 	#print(touchEnemy)
-	
-	if touchEnemy:
-		print("dont stop me now!!")
 	
 	if health <= 0:
 		emit_signal("player_dead")	
