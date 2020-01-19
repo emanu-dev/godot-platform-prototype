@@ -8,10 +8,10 @@ onready var sprite = get_node("Sprite")
 
 #Const
 const SPEED = 192
-const JUMP_HEIGHT = -420
+const JUMP_HEIGHT = -600
 const FALL_MULTIPLIER = 1.6
 const JUMP_MULTIPLIER = 2.2
-const AIR_MOVEMENT = .8
+const AIR_MOVEMENT = 1
 const KNOCKBACK_FORCE = 256
 
 #Movement
